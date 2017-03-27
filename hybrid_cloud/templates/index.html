@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block nav %}
+<li class="active"><a href="/index/">Main Page <span class="sr-only">(current)</span></a></li>
+<li><a href="/overview/">Overview Page</a></li>
+<li><a href="/instance/">Instance Manage</a></li>
+<li><a href="/create/">Virtual instance</a></li>
+{% endblock %}
+
+
+{% block content %}
+<div class="page-header">
+  <h2>系统主页&nbsp;<small>欢迎使用混合云系统</small></h2>
+</div>
+
+<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped" style="width: 50%">
+    <span class="sr-only">35% Complete (success)</span>
+  </div>
+  <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 45%">
+    <span class="sr-only">20% Complete (warning)</span>
+  </div>
+</div>
+
+<div class="page-header">
+  <h3>系统功能</h3>
+</div>
+
+<div class="panel panel-info"> <!-- panel-primary -->
+      <div class="panel-heading">
+            <h3 class="panel-title">管理混合云文档</h3>
+      </div>
+      <div class="panel-body">
+        提供混合云文档的连接与说明
+      </div>
+</div>
+
+<div class="panel panel-success"> <!-- panel-primary -->
+      <div class="panel-heading">
+            <h3 class="panel-title">监测云平台的资源</h3>
+      </div>
+      <div class="panel-body">
+        可以提供对云平台CPU，内存，硬盘的监控图表，并提供虚拟机的资源参数
+      </div>
+</div>
+
+<div class="panel panel-info"> <!-- panel-primary -->
+      <div class="panel-heading">
+            <h3 class="panel-title">管理虚拟机</h3>
+      </div>
+      <div class="panel-body">
+        可以对虚拟机的详细情况进行查看并进行关机开机删除等操作
+      </div>
+</div>
+
+<div class="panel panel-success"> <!-- panel-primary -->
+      <div class="panel-heading">
+            <h3 class="panel-title">虚拟机机创建</h3>
+      </div>
+      <div class="panel-body">
+        采用智能的虚拟机调度算法按照资源进行实际创建
+      </div>
+</div>
+
+<div class="page-header">
+  <h3>混合云文档</h3>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">文档入口</div>
+  <div class="panel-body">
+    <div class="btn-group">
+        <a href="http://docs.openstack.org/">
+           <button type="button" class="btn btn-primary">Openstack文档</button>
+        </a>
+    </div>
+      &nbsp;&nbsp;
+    <div class="btn-group">
+        <a href="https://develop.aliyun.com/">
+            <button type="button" class="btn btn-success">Aliyun的文档</button>
+        </a>
+    </div>
+  </div>
+</div>
+
+<!-- Single button -->
+{% endblock %}
+
+

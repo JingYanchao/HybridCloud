@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav %}
+<li><a href="/index/">Main Page</a></li>
+<li ><a href="/overview/">Overview Page </a></li>
+<li><a href="/instance/">Instance Manage</a></li>
+<li  class="active"><a href="/create/">Virtual instance<span class="sr-only">(current)</span></a></li>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="page-header">
+  <h2>虚拟机创建界面&nbsp;<small>欢迎使用虚拟机创建界面</small></h2>
+</div>
+<div class="page-header">
+  <h3>虚拟机创建</h3>
+</div>
+
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  虚拟机创建是通过用户指定需要的参数，然后系统调度器根据调度规则将用户的请求创建到相应的云平台上面，如果无法创建则告知用户不能完成创建的原因
+</div>
+
+<div class="page-header">
+  <h4><b>系统调度算法:&nbsp; &nbsp; </b><small>Optimal Decay Algorithm for the 0-1 integer linear programming</small></h4>
+</div>
+
+<div class="page-header">
+  <h4><b>用户可选的虚拟机模式:&nbsp; &nbsp; </b><small>不同计算能力，存储能力的虚拟机配额</small></h4>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">虚拟机可选配额</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+       <tr>
+           <th>名称</th>
+           <th>虚拟内核(单位:个)</th>
+           <th>内存(单位:GB)</th>
+           <th>磁盘总计(单位:GB)</th>
+       </tr>
+      </thead>
+      <tbody>
+        <tr>
+           <td>m.small</td>
+           <td>1</td>
+           <td>2</td>
+           <td>20</td>
+        </tr>
+        <tr>
+           <td>m.medium</td>
+           <td>2</td>
+           <td>4</td>
+           <td>40</td>
+        </tr>
+        <tr>
+           <td>m.large</td>
+           <td>4</td>
+           <td>8</td>
+           <td>80</td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+<div class="page-header">
+  <h4><b>开始创建:&nbsp; &nbsp; </b><small>竭诚提供不可计算的优质服务</small></h4>
+</div>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-primary" id="start">开始创建</button>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">创建虚拟机</h4>
+      </div>
+
+      <div class="modal-body">
+        <p><b>参数输入</b></p>
+
+         <div class="panel panel-warning">
+  <!-- Default panel contents -->
+          <div class="panel-heading">虚拟机数量选择</div>
+
+          <!-- Table -->
+          <table class="table">
+              <thead>
+               <tr>
+                   <th>虚拟机类型</th>
+                   <th>虚拟机个数</th>
+               </tr>
+              </thead>
+              <tbody>
+                <tr>
+                   <td><b>m.small</b>&nbsp;(cpu:&nbsp;1&nbsp;ram:&nbsp;2gb&nbsp;disk:&nbsp;20gb)</td>
+                    <td>
+                       <div class="input-group">
+                        <input type="text" class="form-control"  aria-describedby="basic-addon1" id="small_num">
+                        </div>
+                   </td>
+                </tr>
+                <tr>
+                   <td><b>m.medium</b>&nbsp;(cpu:&nbsp;2&nbsp;ram:&nbsp;4gb&nbsp;disk:&nbsp;40gb)</td>
+                    <td>
+                       <div class="input-group">
+                        <input type="text" class="form-control"  aria-describedby="basic-addon1" id="medium_num">
+                        </div>
+                   </td>
+                </tr>
+                <tr>
+                   <td><b>m.large</b>&nbsp;(cpu:&nbsp;4&nbsp;ram:&nbsp;8gb&nbsp;disk:&nbsp;80gb)</td>
+                    <td>
+                       <div class="input-group">
+                        <input type="text" class="form-control"  aria-describedby="basic-addon1" id="large_num">
+                        </div>
+                   </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+       <div class="panel panel-warning">
+          <div class="panel-heading">特殊选项</div>
+          <table class="table">
+              <thead>
+              <th>
+                  <b>是否必须创建在私有云</b>(默认不是)
+              </th>
+              <th>
+                  <b>虚拟机持续运行时间</b>(单位小时)
+              </th>
+              </thead>
+              <tbody>
+                <tr>
+                   <td>
+                       <div class="btn-group" role="group" aria-label="...">
+                          <button type="button" class="btn btn-default" id="sure">是</button>
+                          <button type="button" class="btn btn-default" id="refuse">否</button>
+                        </div>
+                   </td>
+                    <td>
+                       <div class="input-group">
+                            <input type="text" class="form-control"  aria-describedby="basic-addon1" id="time">
+                       </div>
+                   </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger"  id="createinstance">创建</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/create.js' %}"></script>
+{% endblock %}

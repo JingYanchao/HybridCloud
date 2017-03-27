@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav %}
+<li><a href="/index/">Main Page</a></li>
+<li class="active"><a href="/overview/">Overview Page <span class="sr-only">(current)</span></a></li>
+<li><a href="/instance/">Instance Manage</a></li>
+<li><a href="/create/">Virtual instance</a></li>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="page-header">
+  <h2>混合云资源管理&nbsp;<small>欢迎使用混合云资源管理</small></h2>
+</div>
+
+
+
+<div class="page-header">
+  <h3>虚拟机使用概况</h3>
+</div>
+
+   <div class="row placeholders">
+       <div class="col-xs-6 col-sm-3 placeholder">
+            <div width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail" id="openstack_container1">
+            </div>
+            <h4>虚拟机资源</h4>
+            <span class="text-muted">虚拟机使用百分比</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail" id="openstack_container2">
+            </div>
+            <h4>CPU资源</h4>
+            <span class="text-muted">CPU使用百分比</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"  id="openstack_container3">
+            </div>
+            <h4>内存资源</h4>
+            <span class="text-muted">内存使用百分比</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <div width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"  id="openstack_container4">
+            </div>
+            <h4>硬盘资源</h4>
+            <span class="text-muted">硬盘使用百分比</span>
+        </div>
+    </div>
+
+<div class="page-header">
+  <h3>私有云虚拟机资源使用</h3>
+</div>
+<div class="alert alert-info alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  这里是对私有云虚拟机使用内存资源的基本说明，详细信息请进入instance管理界面
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">私有云虚拟机</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+       <tr>
+           <th>云主机名称</th>
+           <th>虚拟内核</th>
+           <th>磁盘</th>
+           <th>内存</th>
+           <th>创建时间</th>
+       </tr>
+      </thead>
+      <tbody>
+        {% for usage in private_usages %}
+            <tr>
+                <td>{{usage.name}}</td>
+                <td>{{usage.vcpus}}</td>
+                <td>{{usage.disk}}</td>
+                <td>{{usage.ram}}</td>
+                <td>{{usage.createTime }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+
+<div class="page-header">
+  <h3>阿里云虚拟机资源使用</h3>
+</div>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  这里是对阿里云虚拟机使用内存资源的基本说明，详细信息请进入instance管理界面
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">阿里云虚拟机</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+      <tr>
+           <th>云主机名称</th>
+           <th>实例类型</th>
+           <th>区域ID</th>
+           <th>运行状态</th>
+           <th>创建时间</th>
+       </tr>
+      </thead>
+      <tbody>
+        {% for usage in public_usages %}
+            <tr>
+                <td>{{usage.name}}</td>
+                <td>{{usage.type}}</td>
+                <td>{{usage.Region_id}}</td>
+                <td>{{usage.status}}</td>
+                <td>{{usage.time}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/highcharts.js' %}"></script>
+<script src="{% static 'js/circle.js' %}"></script>
+<script src="{% static 'js/overview.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav %}
+<li><a href="/index/">Main Page</a></li>
+<li ><a href="/overview/">Overview Page </a></li>
+<li class="active"><a href="/instance/">Instance Manage<span class="sr-only">(current)</span></a></li>
+<li><a href="/create/">Virtual instance</a></li>
+{% endblock %}
+
+
+{% block content %}
+<div class="page-header">
+  <h2>虚拟机管理界面&nbsp;<small>欢迎使用虚拟机管理界面</small></h2>
+</div>
+<div class="page-header">
+  <h3>虚拟机创建</h3>
+</div>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-primary">创建虚拟机</button>
+</div>
+
+<div class="page-header">
+  <h3>私有云虚拟机</h3>
+</div>
+
+<div class="alert alert-info alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  这里是私有云虚拟机的详细信息
+</div>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">私有云虚拟机</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+       <tr>
+           <th style="display:none">instance_id</th>
+           <th>所属云</th>
+           <th>云主机名称</th>
+           <th>镜像名称</th>
+           <th>配置</th>
+           <th>状态</th>
+           <th>可用域</th>
+           <th>电源状态</th>
+           <th>创建时间</th>
+           <th>操作</th>
+       </tr>
+      </thead>
+      <tbody>
+        {% for instance in private_instances %}
+            <tr>
+                <td style="display:none">{{instance.id}}</td>
+                <td>{{instance.cloud}}</td>
+                <td>{{instance.name}}</td>
+                <td>{{instance.image}}</td>
+                <td>{{instance.flavor }}</td>
+                <td>{{instance.status }}</td>
+                <td>{{instance.availability_zone }}</td>
+                <td>{{instance.power_state }}</td>
+                <td>{{instance.createTime }}</td>
+                <td><select onchange="instanceAction(this)" >
+                                        <option value ="start">None</option>
+						                <option value ="start">Start</option>
+						                <option value ="stop">Stop</option>
+						                <option value ="terminate" style="color:red">Terminate</option>
+						                </select></td>
+            </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+
+
+<div class="page-header">
+  <h3>阿里云虚拟机</h3>
+</div>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  这里是阿里云虚拟机的详细信息
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">私有云虚拟机</div>
+
+  <!-- Table -->
+  <table class="table">
+      <thead>
+       <tr>
+           <th style="display:none">instance_id</th>
+           <th>所属云</th>
+           <th>实例名称</th>
+           <th>实例类型</th>
+           <th>公网IP</th>
+           <th>区域ID</th>
+           <th>运行状态</th>
+           <th>镜像ID</th>
+           <th>创建时间</th>
+           <th>操作</th>
+       </tr>
+      </thead>
+      <tbody>
+         {% for instance in public_instances %}
+            <tr>
+                <td style="display:none">{{instance.id}}</td>
+                <td>{{instance.cloud}}</td>
+                <td>{{instance.name}}</td>
+                <td>{{instance.type}}</td>
+                <td>{{instance.ip }}</td>
+                <td>{{instance.Region_id }}</td>
+                <td>{{instance.status }}</td>
+                <td>{{instance.image }}</td>
+                <td>{{instance.time }}</td>
+                <td><select onchange="AliyunAction(this)" >
+						                <option value ="start">None</option>
+						                <option value ="terminate" style="color:red">Terminate</option>
+						                </select></td>
+            </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/instance.js' %}"></script>
+{% endblock %}
